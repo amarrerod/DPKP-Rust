@@ -4,7 +4,10 @@ use std::env;
 fn main() {
     let args: Vec<String> = env::args().collect();
     if args.len() != 3 {
-        println!("Error, expecting instance_path and results_path. Got {:?}", args);
+        println!(
+            "Error, expecting instance_path and results_path. Got {:?}",
+            args
+        );
     } else {
         println!("Dynamic Programming Knapsack Problem in Rust!");
         let instance_path = args[1].clone();
@@ -16,6 +19,6 @@ fn main() {
         };
 
         algorithm.load_instance();
-        println!("{}", algorithm);
+        algorithm.run();
     }
 }
