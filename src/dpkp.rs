@@ -13,7 +13,7 @@ pub mod dpkp_algorithm {
         pub profits: Vec<i32>,
         pub weights: Vec<i32>,
         pub table: Vec<Vec<i32>>,
-        pub elapse_time: f64,
+        pub elapsed_time: f64,
     }
 
     impl Default for KnapsackDP {
@@ -26,7 +26,7 @@ pub mod dpkp_algorithm {
                 profits: vec![],
                 weights: vec![],
                 table: vec![],
-                elapse_time: -1.0,
+                elapsed_time: -1.0,
             }
         }
     }
@@ -74,7 +74,7 @@ pub mod dpkp_algorithm {
             Ok(())
         }
 
-        pub fn run(&mut self) -> i32 {
+        pub fn run(&mut self) -> (i32, f64) {
             let start_time = Instant::now();
             for i in 0..=self.n_items {
                 for j in 0..=self.capacity {
@@ -94,10 +94,9 @@ pub mod dpkp_algorithm {
                 }
             }
 
-            let elapsed_time = start_time.elapsed();
+            self.elapsed_time = start_time.elapsed().as_secs_f64();
             let best = self.table[self.n_items as usize][self.capacity as usize];
-            println!("Best: {} in {}s", best, elapsed_time.as_secs_f32());
-            return best;
+            return (best, self.elapsed_time);
         }
     }
 }
