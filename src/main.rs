@@ -18,7 +18,7 @@ fn main() {
             ..Default::default()
         };
 
-        algorithm.load_instance();
+        algorithm.load_instance().ok();
         algorithm.run();
     }
 }
