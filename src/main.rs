@@ -1,10 +1,6 @@
 mod dpkp;
+mod printer;
 use std::env;
-use std::io::prelude::*;
-use std::{
-    fs::File,
-    io::{BufWriter, Write},
-};
 
 fn main() {
     let args: Vec<String> = env::args().collect();
@@ -24,10 +20,6 @@ fn main() {
 
         algorithm.load_instance().ok();
         let (best, time) = algorithm.run();
-        // Open a file in write-only mode, returns `io::Result<File>`
-        let file = File::create(&results_path).unwrap();
-        let mut writer = BufWriter::new(&file);
-
-        write!(&mut writer, "{}\n{}", best, time);
+        printer::write_to_file(best, time, results_path);
     }
 }
